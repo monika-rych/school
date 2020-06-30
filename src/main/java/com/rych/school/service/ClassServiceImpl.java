@@ -20,15 +20,14 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public Map<String, List<Student>> getStudentsOfClasses(String schoolId) {
-        Map<String, List<Student>> studentsOfClasses = new HashMap<>();
-        schoolRepository.getAll().stream()
+        return schoolRepository.getAll().stream()
                 .filter(school -> school.getId().equals(schoolId))
                 .map(school -> school.getSchoolClasses())
                 .flatMap(Collection::stream)
-                .map(schoolClass -> studentsOfClasses.put(schoolClass.getName(), new ArrayList<Student>(schoolClass.getStudents())))
-                .collect(Collectors.toList());
-
-        return studentsOfClasses;
+                .collect(
+                        Collectors.toMap(schoolClass -> schoolClass.getName(),
+                                schoolClass -> new ArrayList<>(schoolClass.getStudents())
+                        ));
     }
 
     @Override
