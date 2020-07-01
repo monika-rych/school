@@ -1,6 +1,8 @@
 package com.rych.school;
 
+import com.rych.school.domain.School;
 import com.rych.school.domain.Student;
+import com.rych.school.optional.api.OptionalTestService;
 import com.rych.school.repository.SchoolRepositoryImpl;
 import com.rych.school.repository.api.SchoolRepository;
 import com.rych.school.service.ClassServiceImpl;
@@ -36,8 +38,14 @@ public class SchoolApplication {
             System.out.println();
         } );
 
+        //OptionalTestService optionalTestService = new OptionalTestServiceImpl();
+
+       // School school = new School();
+        //System.out.println(optionalTestService.getSchoolStreet(school));
+
+        Map<String, Long> numberOfStudentsOfClasses = classService.getCountOfStudentsInClasses("1");
+        numberOfStudentsOfClasses.forEach((className, students) ->{
+            System.out.println("Nazwa klasy " + className + " liczba studentow: " + students);
+        } );
     }
-
-
-
 }

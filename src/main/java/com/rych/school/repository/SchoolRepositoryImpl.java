@@ -15,6 +15,7 @@ import java.util.Set;
 public class SchoolRepositoryImpl implements SchoolRepository {
 
     List<School> schools = new ArrayList<>();
+    List<Address> addresses = new ArrayList<>();
 
     public SchoolRepositoryImpl() {
 
@@ -73,10 +74,24 @@ public class SchoolRepositoryImpl implements SchoolRepository {
         schools.add(school1);
         schools.add(school2);
 
+        addresses.add(address1);
+        addresses.add(address2);
+        addresses.add(address3);
+        addresses.add(address4);
+        addresses.add(address5);
+        addresses.add(address6);
+        addresses.add(address7);
+        addresses.add(address8);
+
     }
 
     @Override
     public List<School> getAll() {
         return schools;
+    }
+
+    @Override
+    public List<Address> getAllStudentsAddresses() {
+        return addresses;
     }
 }

@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface AddressService {
 
-    Map<String, Long> getCountOfStudentsInClasses(String schoolId);
+    int getTheLowestNumberOfHomeNumber();
 
 }

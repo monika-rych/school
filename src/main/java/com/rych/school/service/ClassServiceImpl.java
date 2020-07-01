@@ -18,6 +18,7 @@ public class ClassServiceImpl implements ClassService {
         this.schoolRepository = schoolRepository;
     }
 
+    //sprobowac z grupingBy
     @Override
     public Map<String, List<Student>> getStudentsOfClasses(String schoolId) {
         return schoolRepository.getAll().stream()
@@ -32,6 +33,14 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public Map<String, Long> getCountOfStudentsInClasses(String schoolId) {
-        return null;
+
+        return schoolRepository.getAll().stream()
+                .filter(school -> school.getId().equals(schoolId))
+                .map(school -> school.getSchoolClasses())
+                .flatMap(Collection::stream)
+                .collect(
+                        Collectors.toMap(schoolClass -> schoolClass.getName(),
+                                schoolClass -> (long) schoolClass.getStudents().size()
+                        ));
     }
 }

@@ -22,8 +22,8 @@ public class SchoolServiceImpl implements SchoolService {
     public List<Student> getAllStudents(String schoolId) {
         return schoolRepository.getAll().stream()
                 .filter(school -> school.getId().equals(schoolId))
-                .map(school -> school.getSchoolClasses())
-                .flatMap(Collection::stream)
+                .flatMap(school -> school.getSchoolClasses().stream())
+                //.flatMap(Collection::stream)
                 .map(schoolClass -> schoolClass.getStudents())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
