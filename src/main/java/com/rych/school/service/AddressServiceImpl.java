@@ -5,6 +5,7 @@ import com.rych.school.repository.api.SchoolRepository;
 import com.rych.school.service.api.AddressService;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class AddressServiceImpl implements AddressService {
 
@@ -18,6 +19,9 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public int getTheLowestNumberOfHomeNumber() {
         List<Address> addresses = schoolRepository.getAllStudentsAddresses();
-        return 0;
+        return addresses.stream()
+                .flatMapToInt(address -> IntStream.of(address.getHomeNumber()))
+                .min()
+                .getAsInt();
     }
 }

@@ -5,8 +5,10 @@ import com.rych.school.domain.Student;
 import com.rych.school.optional.api.OptionalTestService;
 import com.rych.school.repository.SchoolRepositoryImpl;
 import com.rych.school.repository.api.SchoolRepository;
+import com.rych.school.service.AddressServiceImpl;
 import com.rych.school.service.ClassServiceImpl;
 import com.rych.school.service.SchoolServiceImpl;
+import com.rych.school.service.api.AddressService;
 import com.rych.school.service.api.ClassService;
 import com.rych.school.service.api.SchoolService;
 import org.springframework.boot.SpringApplication;
@@ -47,5 +49,8 @@ public class SchoolApplication {
         numberOfStudentsOfClasses.forEach((className, students) ->{
             System.out.println("Nazwa klasy " + className + " liczba studentow: " + students);
         } );
+
+        AddressService addressService = new AddressServiceImpl(schoolRepository);
+        System.out.println(addressService.getTheLowestNumberOfHomeNumber());
     }
 }
